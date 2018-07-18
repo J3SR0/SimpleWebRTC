@@ -232,6 +232,7 @@ function SimpleWebRTC(opts) {
         if (self.getLocalScreen()) {
             self.stopScreenShare();
         }
+        self.emit('localStreamStopped', stream);
         /*
         self.connection.emit('unshareScreen');
         self.webrtc.peers.forEach(function (peer) {
