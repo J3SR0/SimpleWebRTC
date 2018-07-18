@@ -243,6 +243,20 @@ function SimpleWebRTC(opts) {
         */
     });
 
+    this.webrtc.on('localStreamStopped', function (stream) {
+        if (self.getLocalScreen()) {
+            self.stopScreenShare();
+        }
+        self.emit('localStreamStopped', stream);
+        /*
+        self.connection.emit('unshareScreen');
+        self.webrtc.peers.forEach(function (peer) {
+            if (peer.sharemyscreen) {
+                peer.end();
+            }
+        });
+        */
+    });
     this.webrtc.on('channelMessage', function (peer, label, data) {
         if (data.type == 'volume') {
             self.emit('remoteVolumeChange', peer, data.volume);
